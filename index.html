@@ -1,9 +1,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-html {
-
-}
 body {
     font-family: 'Righteous', cursive;
     margin:0;
@@ -83,14 +81,16 @@ a {
     top: 8px;
 }
 
-
+h2{font-weight:500}
 </style>
 
-<body onload="oninit()">
-<a href="https://accounts.spotify.com/authorize?client_id=2788ef9b99b94f508d797cf63afdc445&response_type=token&redirect_uri=http:%2F%2Flocalhost%2Findex.html&scope=user-read-currently-playing"></a>
+<body onload="oninit()"><a></a></body>
 
-</body>
 <script>
+const CLIENT_ID = '2788ef9b99b94f508d797cf63afdc445';
+const REDIRECT_URL = window.location.href.indexOf('localhost') == -1 ? 'https:%2F%2Fpkubiak.github.io%2Fspotify%2Findex.html' : 'http:%2F%2Flocalhost%2Findex.html';
+const POLL_INTERVAL = 5000;
+
 var last= null, views=[];
 
 function getToken() {
@@ -102,6 +102,7 @@ function getToken() {
     }
     return null;
 }
+
 function popView() {
     if(views.length > 1) {
         let view = views.shift();
@@ -151,12 +152,14 @@ function readState(token) {
             updateView(data)
         });
 }
+
 function oninit(){
+    document.querySelector('a').href = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${REDIRECT_URL}&scope=user-read-currently-playing`;
     let token = getToken();
     console.log('token:', token);
     if(token) {
         readState(token);
-        setInterval(function(){readState(token);}, 5000);
+        setInterval(function(){readState(token);}, POLL_INTERVAL);
     }
 }
 </script>
