@@ -1,5 +1,6 @@
 body {
     font-family: 'Righteous', cursive;
+    /* font-family: 'Suez One', serif; */
     margin:0;
 }
 
@@ -39,8 +40,9 @@ div.backdrop {
 }
 
 img {
-    max-width: 640px;
-    max-height: 640px;
+    /* max-width: 640px; */
+    max-width: 100%;
+    /* max-height: 640px; */
     box-shadow: 0 0 10px black;
     /* transform: perspective(1000px) rotateY(0deg);; */
     /* backface-visibility: hidden; */

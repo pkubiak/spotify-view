@@ -36,6 +36,7 @@ function updateView(data) {
     main.style.backgroundImage = 'url('+data.cover+')';
     title.innerText = data.title;
     artist.innerText = data.artists.join(', ');
+    document.title = '▶ ' + data.title + ' - ' + data.artists.join(', ');
 
     backdrop.appendChild(img);
     backdrop.appendChild(title);
