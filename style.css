@@ -60,7 +60,8 @@ h2 {
 }
 h1, h2, h3 {
     flex: 0;
-    text-shadow: 0 0 10px #fffa;
+    text-shadow: 0 0 10px #000a;
+    color: #fff;
     text-align: center;
 }
 
