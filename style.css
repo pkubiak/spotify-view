@@ -1,0 +1,89 @@
+body {
+    font-family: 'Righteous', cursive;
+    margin:0;
+}
+
+main {
+    position: absolute;
+    left: 0;top:0;width:100%;height:100%;;
+
+    /* overflow: hidden; */
+    flex-direction: column;
+    /* max-height:100%; */
+    background-size:cover;
+    /* background-size: 100% 100%; */
+    background-position: center;
+
+    display: flex;
+    opacity: 0;
+    animation-name: appear;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    background-color:blue;
+}
+
+div.backdrop {
+    overflow:hidden;
+    backdrop-filter: blur(100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding:1cm;
+    position: absolute;
+    left: 0;top:0;width:100%;height:100%;;
+    box-sizing: border-box;
+    /* background:#f005; */
+}
+
+img {
+    max-width: 640px;
+    max-height: 640px;
+    box-shadow: 0 0 10px black;
+    /* transform: perspective(1000px) rotateY(0deg);; */
+    /* backface-visibility: hidden; */
+    /* transition: transform 1s; */
+}
+
+/* img.x{
+    transform: perspective(1000px)  rotateY(360deg);
+} */
+
+h1 {
+    font-size: 48px;
+}
+h2 {
+    font-size: 32px;
+    margin: 0
+}
+h1, h2, h3 {
+    flex: 0;
+    text-shadow: 0 0 10px #fffa;
+    text-align: center;
+}
+
+@keyframes appear{
+    from {opacity: 0;}
+    to{opacity:1;}
+}
+
+a:hover {
+    opacity: 1.0;
+}
+a {
+    /* width: 160px;
+    height: 96px; */
+    width: 48px; height: 48px;
+    background: url(https://developer.spotify.com/assets/branding-guidelines/icon4@2x.png);
+    /* background: url(https://developer.spotify.com/assets/branding-guidelines/logo@2x.png) no-repeat center center; */
+    background-size:contain;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    z-index:10;
+    opacity: 0.5;
+}
+
+h2{font-weight:500}
