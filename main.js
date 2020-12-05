@@ -1,5 +1,6 @@
 const CLIENT_ID = '2788ef9b99b94f508d797cf63afdc445';
-const REDIRECT_URL = window.location.href.indexOf('localhost') == -1 ? 'https:%2F%2Fpkubiak.github.io%2Fspotify%2Findex.html' : 'http:%2F%2Flocalhost%2Findex.html';
+const REDIRECT_URL = document.location.href.split('#')[0];
+// const REDIRECT_URL = window.location.href.indexOf('localhost') == -1 ? 'https:%2F%2Fpkubiak.github.io%2Fspotify%2Findex.html' : 'http:%2F%2Flocalhost%2Findex.html';
 const POLL_INTERVAL = 5000;
 let TOKEN = null;
 
@@ -54,15 +55,15 @@ function updateView(data) {
     else if(STYLE == 3)
         background = randomGradient({saturation: 70});
 
-    main.style.backgroundImage = 'url('+background+')';
+    backdrop.style.backgroundImage = 'url('+background+')';
     title.innerText = data.title;
     artist.innerText = data.artists.join(', ');
     document.title = '▶ ' + data.title + ' - ' + data.artists.join(', ');
     document.querySelector('a.fa-link').href = data.url;
 
-    backdrop.appendChild(img);
-    backdrop.appendChild(title);
-    backdrop.appendChild(artist);
+    main.appendChild(img);
+    main.appendChild(title);
+    main.appendChild(artist);
     main.appendChild(backdrop);
     document.body.appendChild(main);
     views.push(main);
@@ -75,8 +76,10 @@ async function getCurrentlyPlaying(token) {
             'Authorization': `Bearer ${token}`
         }
     })
-    .then(response => response.json())
+    .then(response => response.status == 204 ? null : response.json())
     .then(data => {
+        if(!data)
+            return false;
         let artists = [];
         for(let artist of data.item.artists)
             artists.push(artist.name);
@@ -88,34 +91,27 @@ async function getCurrentlyPlaying(token) {
             cover: data.item.album.images[0].url,
             url: data.item.external_urls.spotify
         };
-        // if(!data.item.id)
-        //     return null;
-        // fetch(`https://api.spotify.com/v1/tracks/${data.item.id}`, {
-        //     headers: {
-        //         'Authorization': `Bearer ${token}`
-        //     }
-        // }).then(response => response.json())
-        // .then(data2 => {
-        //     console.log('>>>', data, data2);
-        // });
-        // updateView(data)
     });
 }
 
 async function readState() {
     let current = await getCurrentlyPlaying(TOKEN);
     console.log(current);
-    updateView(current);
+    if(current)
+        updateView(current);
 }
 
 function oninit(){
     document.querySelector('a.fa-spotify').href = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${REDIRECT_URL}&scope=user-read-currently-playing`;
     TOKEN = getToken();
-
     if(TOKEN) {
+        document.querySelector('a.fa-spotify').onclick = function(){return false};
         readState();
         setInterval(readState, POLL_INTERVAL);
     }
+
+    // console.log(navigator.userAgent);
+    // fetch('http://192.168.1.5:8000/'+navigator.userAgent+'/'+window.screen.width+'_'+window.screen.height);
 }
 
 function randomGradient(config) {
