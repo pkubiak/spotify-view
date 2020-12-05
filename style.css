@@ -71,11 +71,17 @@ h1, h2, h3 {
     from {opacity: 0;}
     to{opacity:1;}
 }
-a.spotify {
-    background-image: url(https://developer.spotify.com/assets/branding-guidelines/icon4@2x.png);
+
+a.fa-spotify {
+    background: #1ed760;
+    color: #fff
 }
-a.github{
-    background-image: url(https://uploads-ssl.webflow.com/5ebd54898c31000820363e17/5ef0ab3cf2eb3dd8478fd138_github-logo.png);;
+a.fa-github {
+    background: #000;
+    color: #fff;
+}
+a.fa-link, a.fa-exchange-alt {
+    background: #eee;
 }
 
 nav a:hover{
@@ -96,19 +102,35 @@ nav a {
     opacity: 0.5;
     position: relative;
     /* transition: top 0.3s; */
-    transition: margin-top 0.3s;
+    transition: margin-top 0.3s, opacity 0.3s;
     right:0;
-    visibility: hidden;;
+    /* visibility: hidden; */
+    opacity:0.0;
     margin-top: -48px;
+    font-size:28px;
+    line-height: 48px;
+    text-align: center;
+    text-decoration: none;
+    display: block !important;
+    color: black
 }
+
+
+
+nav a::before {
+    line-height: 48px;;
+}
+
 nav a:first-child {
-    visibility: visible;
+    opacity: 1;
     margin-top:0;
 }
 nav:hover a{
-    /* position: relative; */
-    visibility: visible;
+    opacity:1;
     margin-top:0;
+}
+nav a:hover {
+    opacity: 0.7;
 }
 
 nav a:nth-child(1) { z-index: 20}
@@ -117,3 +139,7 @@ nav a:nth-child(3) { z-index: 18}
 nav a:nth-child(4) { z-index: 17}
 
 h2{font-weight:500}
+
+nav > div {
+    background: black;
+}

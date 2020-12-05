@@ -6,15 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <!-- <link href="https://fonts.googleapis.com/css2?family=Suez+One&display=swap" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <link href="style.css" rel="stylesheet">
 </head>
 
 <body onload="oninit()">
-    <nav>
-        <a class="spotify" title="Authorize application with Spotify"></a>
-        <a class="github" title="View on Github" href="https://github.com/pkubiak/spotify-view"></a>
-    </nav>
+    <nav><div>
+        <a class="fab fa-spotify" title="Authorize application with Spotify"></a>
+        <a class="fab fa-github" title="View on Github" href="https://github.com/pkubiak/spotify-view"></a>
+        <a class="fas fa-link" title="Link to current song" href="#"></a>
+        <a class="fas fa-exchange-alt" title="Change visualization style" href="javascript:nextStyle()"></a>
+    </div></nav>
     <script src="main.js"></script>
 </body>
-    
 </html>
