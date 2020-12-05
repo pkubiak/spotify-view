@@ -42,10 +42,12 @@ function updateView(data) {
     let img = document.createElement('img');
     let title = document.createElement('h1');
     let artist = document.createElement('h2');
+    let artwork = document.createElement('div');
+    artwork.classList.add('artwork');
     backdrop.classList.add('backdrop');
     img.src = data.cover;
-    let background = null;
 
+    let background = null;
     if(STYLE == 0)
         background = data.cover;
     else if(STYLE == 1)
@@ -61,9 +63,10 @@ function updateView(data) {
     document.title = '▶ ' + data.title + ' - ' + data.artists.join(', ');
     document.querySelector('a.fa-link').href = data.url;
 
-    main.appendChild(img);
-    main.appendChild(title);
-    main.appendChild(artist);
+    artwork.appendChild(img);
+    artwork.appendChild(title);
+    artwork.appendChild(artist);
+    main.appendChild(artwork);
     main.appendChild(backdrop);
     document.body.appendChild(main);
     views.push(main);
@@ -76,8 +79,14 @@ async function getCurrentlyPlaying(token) {
             'Authorization': `Bearer ${token}`
         }
     })
-    .then(response => response.status == 204 ? null : response.json())
-    .then(data => {
+    .then(response => {
+        if(response.status == 401){
+            document.querySelector('a.fa-spotify').onclick = function(){};
+            return null;
+        }else if(response.status == 204)
+            return null;
+        return response.json();
+    }).then(data => {
         if(!data)
             return false;
         let artists = [];

@@ -38,7 +38,7 @@ main {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding:1cm;
+    padding: 80px;
     box-sizing: border-box;
 }
 div.backdrop {
@@ -59,33 +59,31 @@ div.backdrop {
 }
 
 img {
-    /* max-width: 640px; */
     max-width: 100%;
-    /* max-height: 640px; */
     box-shadow: 0 0 10px black;
-    /* transform: perspective(1000px) rotateY(0deg);; */
-    /* backface-visibility: hidden; */
-    /* transition: transform 1s; */
 }
 
-/* img.x{
-    transform: perspective(1000px)  rotateY(360deg);
-} */
-
-h1 {
-    font-size: 3rem;
-}
-h2 {
-    font-size: 2rem;
-    margin: 0
-}
 h1, h2, h3 {
+    margin:0 auto;
     flex: 0;
     text-shadow: 0 0 10px #000a;
     color: #fff;
     text-align: center;
-    white-space: nowrap;;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
+
+h1 {
+    font-size: 3rem;
+    margin:0.6em auto;
+}
+h2 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 
 @keyframes appear{
     from {opacity: 0;}
@@ -164,10 +162,26 @@ nav > div {
     background: black;
 }
 
+.artwork {
+    text-align: center;
+    max-width: 100%;
+}
+
+@media (max-width: 576px) {
+    :root {
+        font-size: 10px;
+    }
+    main {
+        padding: 40px;
+    }
+}
+
 /* Samsung Watch Active 2 */
 @media screen and (device-width: 360px) and (device-height: 360px)  {
+    div.artwork {
+        background: transparent;
+    }
     img {
-        /* border-radius: 360px; */
         border-radius: 10px;
         width: 180px;height: 180px;
         margin-top:20px;
@@ -206,10 +220,17 @@ nav > div {
     h1 {
         margin-bottom: 0.1em;
         margin-top:0.5em;
+        max-width: 270px;
+
+    }
+
+    h2 {
+        max-width: 220px;
     }
 
     div.backdrop {
-        filter: blur(40px);
-        -webkit-filter: blur(40px);
+        filter: blur(0px);
+        -webkit-filter: blur(0px);
     }
 }
+
